@@ -4,7 +4,10 @@ React application goes here.
 
 You are free to:
 - choose JS or TS (but TS is preferred ;-)
-- choose state management approach (or none)
 - mock APIs if needed
 
-- KISS: ignore authentication or other complicated (but be ready to discuss how to handle them)
+## CARE ABOUT
+- UX/UI: clear, meaningful, self-explanatory and user-friendly interface 
+
+## IGNORE
+- ignore complicated stuff (but be ready to discuss how to handle them): performance, state management, security, accessibility

@@ -47,7 +47,7 @@ Una posizione interna può essere composta da titoli detenuti su più banche
 
 ### B – Posizione bancaria su più portafogli
 Una posizione su un conto titoli può essere allocata su più portafogli  
-(es. 100 azioni Tesla = 30 Tech + 70 USA).
+(es. 100 azioni Tesla sul conto titoli = 30 Portafoglio Tech + 70 Portafoglio USA).
 
 ### C – Riconciliazione manuale
 Alcune banche non inviano report digitali.  
@@ -77,12 +77,13 @@ Non tutte le domande avranno una risposta definitiva, in certi casi potrei lasci
 
 ## Consegna
 
-Struttura consigliata del repository:
+Struttura del repository:
 
 /backend  
 /frontend  
 PROBLEM.md  
 README.md  
+DECISIONS.md
 
 ---
 
@@ -92,17 +93,20 @@ README.md
 - niente autenticazione
 - niente test automatici
 
-L’importante è motivare le priorità.
+Concentrati sulle parti dove **ti senti più forte** e dove pensi di poter **creare valore**.
 
 ---
 
 ## Uso di AI
 
 Puoi usare qualsiasi strumento, inclusa AI,
-purché tu sia in grado di comprendere e spiegare il codice.
+purché tu sia in grado di comprendere e spiegare il codice presentato.
 
 ---
 
 ## Tempo indicativo
 
-4–6 ore.
+4–6 ore. Se vuoi fermarti prima, non c'è problema , l’importante è motivare le priorità. 
+
+Non metterci troppo tempo, l’obiettivo principale è capire come ragioni, che domande ti fai e come prendi decisioni quando i requisiti non sono completamente definiti.
+
