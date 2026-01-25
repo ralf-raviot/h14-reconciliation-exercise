@@ -7,3 +7,7 @@ Our discussion will be based on the code, not on this file.
 - Trade-offs
 - Open questions
 - What I would change in production
+
+Database:
+Since it's an exercise, H2 it's the most suitable choice.
+
