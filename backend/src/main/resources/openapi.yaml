@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: H14 Reconciliation API
+  description: API for the H14 securities reconciliation exercise
+  version: 0.1.0
+tags:
+  - name: Portfolios
+    description: Portfolios operations
+
+
+paths:
+  /portfolios:
+    get:
+      tags:
+        - Portfolios
+      summary: List of all portfolios
+      responses:
+        '200':
+          description: List of all portfolios successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PortfolioSummaryResponse'
+
+  /portfolios/{portfolioId}:
+    get:
+      tags:
+        - Portfolios
+      summary: Retrieves the details of a portfolio including consolidated positions
+      parameters:
+        - name: portfolioId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Portfolio details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioResponse'
+        '404':
+          description: Portfolio not found
+
+components:
+  schemas:
+    SecurityResponse:
+      type: object
+      properties:
+        isin:
+          type: string
+          example: "US0378331005"
+        name:
+          type: string
+          example: "Apple Inc."
+        currency:
+          type: string
+          example: "USD"
+        marketPrice:
+          type: number
+          format: double
+          example: 185.92
+
+    BankResponse:
+      type: string
+      enum:
+        - BANCAPOSTALE
+        - NEOBANCA
+        - SUPERBANCA
+
+    PositionOriginResponse:
+      type: string
+      enum:
+        - INTERNAL
+        - BANK
+
+    PositionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        security:
+          $ref: '#/components/schemas/SecurityResponse'
+        quantity:
+          type: integer
+          example: 100
+        origin:
+          $ref: '#/components/schemas/PositionOriginResponse'
+        bank:
+          $ref: '#/components/schemas/BankResponse'
+          nullable: true
+
+    ConsolidatedPositionResponse:
+      type: object
+      properties:
+        security:
+          $ref: '#/components/schemas/SecurityResponse'
+        internalPosition:
+          $ref: '#/components/schemas/PositionResponse'
+          nullable: true
+        bankPositions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PositionResponse'
+        status:
+          $ref: '#/components/schemas/ConsolidationStatusResponse'
+
+    ConsolidationStatusResponse:
+      type: string
+      enum:
+        - CONSOLIDATED
+        - NOT_CONSOLIDATED
+        - UNKNOWN_POSITION
+
+    PortfolioResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          nullable: true
+        clientId:
+          type: string
+        positions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ConsolidatedPositionResponse'
+          description: "Map where the key is the ISIN (or Security identifier) and the value is the consolidated position"
+
+    PortfolioSummaryResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          nullable: true
+        clientId:
+          type: string
