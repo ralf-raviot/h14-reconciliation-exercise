@@ -26,6 +26,14 @@ java {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs += 'generated-sources/src/main/java'
+        }
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -46,6 +54,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.mapstruct:mapstruct:1.6.3'
     implementation 'tools.jackson.core:jackson-core:3.0.3'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
@@ -57,13 +66,17 @@ openApiGenerate {
     generatorName.set("spring")
     inputSpec.set("$projectDir/src/main/resources/openapi.yaml")
     outputDir.set("$projectDir/generated-sources")
-    apiPackage.set("org.openapi.example.api")
-    modelPackage.set("org.openapi.example.model")
+    apiPackage.set("it.h14.backend.openapi.api")
+    modelPackage.set("it.h14.backend.openapi.model")
     configOptions.set([
             dateLibrary  : "java8",
-            interfaceOnly: "true"
+            interfaceOnly       : "true",
+            useSpringBoot3      : "true",
+            skipDefaultInterface: "true"
     ])
 }
+
+tasks.compileJava.dependsOn tasks.openApiGenerate
 
 tasks.named('test') {
     useJUnitPlatform()
