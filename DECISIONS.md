@@ -23,6 +23,8 @@ Our discussion will be based on the code, not on this file.
 ### Test:
 
 - Bank and Swarm are not tested because they are mocked.
+- In the same logic, the tests used directly the mocked data of the "production" repository instead of mocking it to
+  avoid duplication of the mocking.
 
 ### CronJob:
 
@@ -30,11 +32,15 @@ Our discussion will be based on the code, not on this file.
 - Since this is an exercise, the job is also launched at the start of the application, to be able to have data
   immediately.
 
+### Importing data:
+
+- For simplicity, the data import is mocked in the different bank and swarm repositories.
+
 ### Error handling:
 
 - No specific error handling is done.
 
-## Change in production
+# Change in production
 
 - Manage pagination and filters (by clientId, for example)
 - Add a health check endpoint.
@@ -43,3 +49,5 @@ Our discussion will be based on the code, not on this file.
 - Cronjob can be replaced with a scheduler if kubernetes is used.
 - Add meaningful error messages.
 - Add meaningful information, like the total value of the portfolio.
+- Implement a real repository for importing the data.
+- Mock the bank and swarm repositories in the tests.
