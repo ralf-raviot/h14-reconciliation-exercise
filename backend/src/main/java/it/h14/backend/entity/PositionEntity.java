@@ -12,7 +12,8 @@ import lombok.Setter;
 @Table(name = "position_entity")
 public class PositionEntity {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private String id;
 
     @ManyToOne

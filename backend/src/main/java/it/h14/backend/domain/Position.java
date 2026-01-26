@@ -6,8 +6,7 @@ import jakarta.annotation.Nullable;
 /**
  * DTO for {@link PositionEntity}
  */
-public record Position(String id,
-                       Security security,
+public record Position(Security security,
                        Double quantity,
                        PositionOrigin origin,
                        @Nullable Bank bank /*Only used if origin = BANK*/) {
