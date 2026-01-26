@@ -20,6 +20,9 @@ Our discussion will be based on the code, not on this file.
 - The weakness of this model is the "duplication" between position and ConsolidatedPosition. There is maybe a better way
   to do it.
 - The isin is considered as always coherent. The best way to handle it is, of course, to have a unique source of truth.
+- The position object should be linked to a client/portfolio ID, but I realize this too late. This has lead to some
+  complexity
+  in the code.
 
 ### Test:
 
@@ -37,6 +40,8 @@ Our discussion will be based on the code, not on this file.
 
 - For simplicity, the data import is mocked in the different bank and swarm repositories.
 - "Technically" Swarm and Bank "repositories" are not really repositories.
+- All bank repositories have the same code (=> Duplication). In real conditions, all banks have their own API, and so,
+  the code will differ.
 
 ### Error handling:
 
