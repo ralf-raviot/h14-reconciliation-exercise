@@ -47,6 +47,10 @@ Our discussion will be based on the code, not on this file.
 
 - No specific error handling is done.
 
+### Frontend:
+
+- For timing reasons, the frontend is REALLY minimalistic.
+
 # Change in production
 
 - Manage pagination and filters (by clientId, for example)
