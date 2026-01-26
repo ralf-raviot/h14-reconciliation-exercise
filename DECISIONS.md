@@ -12,10 +12,13 @@ Our discussion will be based on the code, not on this file.
 
 - Since it's an exercise, H2 it's the most suitable choice.
 - For simplicity, no pagination or filter is used.
+- The weakness of this model is the "duplication" between position and ConsolidatedPosition. There is maybe a better way
+  to do it.
 
 ### Model:
 
 - The bank object is an enum since we need one specific integration for each bank.
+- There is no client object since there is no direct feature associated with it for now. Only the ID is used.
 
 ### Test:
 

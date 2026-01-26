@@ -1,7 +1,11 @@
 package it.h14.backend.domain;
 
+import it.h14.backend.entity.PositionEntity;
 import jakarta.annotation.Nullable;
 
+/**
+ * DTO for {@link PositionEntity}
+ */
 public record Position(String id,
                        Security security,
                        Double quantity,
