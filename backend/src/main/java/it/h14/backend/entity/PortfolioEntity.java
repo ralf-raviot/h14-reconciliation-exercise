@@ -22,7 +22,7 @@ public class PortfolioEntity {
     @Column(name = "client_id")
     private String clientId;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<ConsolidatedPositionEntity> positions = new LinkedHashSet<>();
 
 }

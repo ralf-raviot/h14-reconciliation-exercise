@@ -5,6 +5,7 @@ import it.h14.backend.repository.SwarmRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,11 +15,10 @@ import java.util.List;
 public class ImportDataService {
 
     private final SwarmRepository swarmRepository;
-
     private final List<BankRepository> bankRepositories;
-
     private final ConsolidationService consolidationService;
 
+    @Transactional
     public void importAllData() {
         log.info("Importing data from Swarm and Banks...");
         importSwarmData();

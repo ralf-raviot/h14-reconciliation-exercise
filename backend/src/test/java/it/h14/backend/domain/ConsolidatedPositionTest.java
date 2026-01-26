@@ -27,7 +27,7 @@ class ConsolidatedPositionTest {
         ConsolidatedPosition consolidatedPosition = new ConsolidatedPosition(
                 security,
                 null,
-                List.of(new Position("P1", security, 10.0, PositionOrigin.BANK, Bank.BANCAPOSTALE))
+                List.of(new Position(security, 10.0, PositionOrigin.BANK, Bank.BANCAPOSTALE))
         );
 
         // When
@@ -46,7 +46,7 @@ class ConsolidatedPositionTest {
     void computeConsolidationStatus_EmptyBankPositions_ReturnsMissingBankPosition() {
         // Given
         Security security = new Security("ISIN123", "Security Name", Currency.getInstance("EUR"), 100.0);
-        Position internalPosition = new Position("P1", security, 10.0, PositionOrigin.INTERNAL, null);
+        Position internalPosition = new Position(security, 10.0, PositionOrigin.INTERNAL, null);
         ConsolidatedPosition consolidatedPosition = new ConsolidatedPosition(
                 security,
                 internalPosition,
@@ -70,10 +70,10 @@ class ConsolidatedPositionTest {
     void computeConsolidationStatus_DifferentQuantities_ReturnsNotConsolidated() {
         // Given
         Security security = new Security("ISIN123", "Security Name", Currency.getInstance("EUR"), 100.0);
-        Position internalPosition = new Position("P1", security, 10.0, PositionOrigin.INTERNAL, null);
+        Position internalPosition = new Position(security, 10.0, PositionOrigin.INTERNAL, null);
         List<Position> bankPositions = List.of(
-                new Position("P2", security, 4.0, PositionOrigin.BANK, Bank.BANCAPOSTALE),
-                new Position("P3", security, 5.0, PositionOrigin.BANK, Bank.NEOBANCA)
+                new Position(security, 4.0, PositionOrigin.BANK, Bank.BANCAPOSTALE),
+                new Position(security, 5.0, PositionOrigin.BANK, Bank.NEOBANCA)
         );
         ConsolidatedPosition consolidatedPosition = new ConsolidatedPosition(
                 security,
@@ -98,10 +98,10 @@ class ConsolidatedPositionTest {
     void computeConsolidationStatus_MatchingQuantities_ReturnsConsolidated() {
         // Given
         Security security = new Security("ISIN123", "Security Name", Currency.getInstance("EUR"), 100.0);
-        Position internalPosition = new Position("P1", security, 10.0, PositionOrigin.INTERNAL, null);
+        Position internalPosition = new Position(security, 10.0, PositionOrigin.INTERNAL, null);
         List<Position> bankPositions = List.of(
-                new Position("P2", security, 4.0, PositionOrigin.BANK, Bank.BANCAPOSTALE),
-                new Position("P3", security, 6.0, PositionOrigin.BANK, Bank.NEOBANCA)
+                new Position(security, 4.0, PositionOrigin.BANK, Bank.BANCAPOSTALE),
+                new Position(security, 6.0, PositionOrigin.BANK, Bank.NEOBANCA)
         );
         ConsolidatedPosition consolidatedPosition = new ConsolidatedPosition(
                 security,

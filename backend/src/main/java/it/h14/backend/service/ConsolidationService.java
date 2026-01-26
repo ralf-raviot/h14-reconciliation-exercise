@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class ConsolidationService {
 
     public void computeConsolidatedPositions() {
-
+        //For this level of complexity, no additional logic is required
     }
 
 }

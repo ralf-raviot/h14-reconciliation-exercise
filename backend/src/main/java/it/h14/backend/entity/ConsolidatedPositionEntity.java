@@ -17,15 +17,15 @@ public class ConsolidatedPositionEntity {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     private SecurityEntity security;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private PositionEntity internalPosition;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<PositionEntity> bankPositions = new LinkedHashSet<>();
 
 }
