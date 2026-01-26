@@ -1,14 +1,24 @@
 package it.h14.backend.repository;
 
-import it.h14.backend.domain.Portfolio;
+import it.h14.backend.mock.MockedData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
+@RequiredArgsConstructor
 public class SwarmRepository {
 
-    public List<Portfolio> getPortfolios() {
-        return List.of();
+    MockedData mockedData;
+
+    public void importData() {
+        importSecurityData();
+        importPortfolioData();
+    }
+
+    private void importSecurityData() {
+    }
+
+    private void importPortfolioData() {
+
     }
 }

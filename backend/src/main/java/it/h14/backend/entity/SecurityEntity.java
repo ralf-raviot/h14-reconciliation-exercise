@@ -1,6 +1,9 @@
 package it.h14.backend.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +14,9 @@ import java.util.Currency;
 @Entity
 @Table(name = "security_entity")
 public class SecurityEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
 
-    @Column(name = "isin")
+    @Id
+    @Column(name = "isin", nullable = false, unique = true)
     private String isin;
 
     @Column(name = "name")
