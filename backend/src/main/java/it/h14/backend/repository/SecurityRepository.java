@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SecurityRepository extends JpaRepository<SecurityEntity, Long> {
+public interface SecurityRepository extends JpaRepository<SecurityEntity, String> {
     Optional<SecurityEntity> findByIsin(String isin);
 }
