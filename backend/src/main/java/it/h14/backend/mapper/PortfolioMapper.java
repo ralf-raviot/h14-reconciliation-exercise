@@ -14,7 +14,5 @@ public interface PortfolioMapper {
 
     Portfolio toDomain(PortfolioEntity portfolioEntity);
 
-    Portfolio toDomain(PortfolioResponse portfolioResponse);
-
     PortfolioResponse toResponse(Portfolio portfolio);
 }

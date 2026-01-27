@@ -12,8 +12,6 @@ public interface PositionMapper {
 
     PositionEntity toEntity(Position position);
 
-    Position toDto(PositionEntity positionEntity);
-
     Position toDomain(PositionEntity positionEntity);
 
     PositionResponse toResponse(Position position);

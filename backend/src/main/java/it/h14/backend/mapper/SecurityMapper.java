@@ -14,7 +14,5 @@ public interface SecurityMapper {
 
     Security toDomain(SecurityEntity securityEntity);
 
-    Security toDomain(SecurityResponse securityResponse);
-
     SecurityResponse toResponse(Security security);
 }
