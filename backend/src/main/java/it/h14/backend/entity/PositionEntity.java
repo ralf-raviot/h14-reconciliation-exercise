@@ -16,12 +16,17 @@ public class PositionEntity {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn
-    private SecurityEntity security;
+    @Column(name = "isin")
+    private String isin;
 
     @Column(name = "quantity")
     private Double quantity;
+
+    @Column(name = "portfolioId")
+    private String portfolioId;
+
+    @Column(name = "clientId")
+    private String clientId;
 
     @Enumerated
     @Column(name = "origin")

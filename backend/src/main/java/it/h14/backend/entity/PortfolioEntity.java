@@ -1,11 +1,11 @@
 package it.h14.backend.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -19,10 +19,6 @@ public class PortfolioEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false)
     private String clientId;
-
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    private Set<ConsolidatedPositionEntity> positions = new LinkedHashSet<>();
-
 }
