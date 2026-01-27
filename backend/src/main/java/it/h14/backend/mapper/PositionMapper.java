@@ -2,6 +2,7 @@ package it.h14.backend.mapper;
 
 import it.h14.backend.domain.Position;
 import it.h14.backend.entity.PositionEntity;
+import it.h14.backend.entity.SecurityEntity;
 import it.h14.backend.openapi.model.PositionResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -12,7 +13,7 @@ public interface PositionMapper {
 
     PositionEntity toEntity(Position position);
 
-    Position toDomain(PositionEntity positionEntity);
+    Position toDomain(PositionEntity positionEntity, SecurityEntity security);
 
     PositionResponse toResponse(Position position);
 }

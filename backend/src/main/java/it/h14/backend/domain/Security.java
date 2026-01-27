@@ -9,4 +9,8 @@ public record Security(String isin,
                        String name,
                        Currency currency,
                        Double marketPrice) {
+
+    public boolean equals(Security other) {
+        return isin.equals(other.isin);
+    }
 }

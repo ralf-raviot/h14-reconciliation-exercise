@@ -122,7 +122,9 @@ components:
         clientId:
           type: string
         positions:
-          ref: '#/components/schemas/ConsolidatedPositionResponse'
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsolidatedPositionResponse'
 
     PortfolioSummaryResponse:
       type: object

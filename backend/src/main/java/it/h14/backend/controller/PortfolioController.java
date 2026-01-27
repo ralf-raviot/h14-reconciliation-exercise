@@ -4,8 +4,9 @@ import it.h14.backend.mapper.PortfolioMapper;
 import it.h14.backend.openapi.api.PortfoliosApi;
 import it.h14.backend.openapi.model.PortfolioResponse;
 import it.h14.backend.openapi.model.PortfolioSummaryResponse;
-import it.h14.backend.repository.PortfolioRepository;
+import it.h14.backend.service.PortfolioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -13,18 +14,21 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class PortfolioController implements PortfoliosApi {
-
-    private final PortfolioRepository portfolioRepository;
     private final PortfolioMapper portfolioMapper;
+
+    private final PortfolioService portfolioService;
 
     @Override
     public ResponseEntity<List<PortfolioSummaryResponse>> portfoliosGet() {
-        return null;
+        log.info("Fetching all portfolios");
+        return ResponseEntity.ok(portfolioService.getAllPortfolios());
     }
 
     @Override
     public ResponseEntity<PortfolioResponse> portfoliosPortfolioIdGet(String portfolioId) {
-        return null;
+        log.info("Fetching portfolio with id {}", portfolioId);
+        return ResponseEntity.ok(portfolioService.getPortfolioById(portfolioId));
     }
 }
