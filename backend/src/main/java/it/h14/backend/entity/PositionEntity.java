@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "position_entity")
+@Table(schema = "PUBLIC", name = "position")
 public class PositionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class PositionEntity {
     @Column(name = "quantity")
     private Double quantity;
 
-    @Column(name = "portfolioId")
+    @Column(name = "portfolio_id")
     private String portfolioId;
 
-    @Column(name = "clientId")
+    @Column(name = "client_id")
     private String clientId;
 
     @Enumerated

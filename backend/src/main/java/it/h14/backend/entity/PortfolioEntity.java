@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "portfolio_entity")
+@Table(schema = "PUBLIC", name = "portfolio")
 public class PortfolioEntity {
     @Id
     @Column(name = "id", nullable = false)

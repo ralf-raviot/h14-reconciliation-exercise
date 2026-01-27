@@ -12,7 +12,7 @@ import java.util.Currency;
 @Getter
 @Setter
 @Entity
-@Table(name = "security_entity")
+@Table(schema = "PUBLIC", name = "security")
 public class SecurityEntity {
 
     @Id
