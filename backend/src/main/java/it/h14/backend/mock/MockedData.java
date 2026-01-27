@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MockedData {
@@ -31,88 +30,83 @@ public class MockedData {
     //List of portfolios from "Swarm"
     public List<Portfolio> getAllPortfolios() {
         return List.of(
-                new Portfolio(PORTFOLIO1, null, CLIENT1, Map.of(
-                        SEC1, simpleFromSwarm(),
-                        SEC2, twoBanksFromSwarm(),
-                        SEC3, missingBankPositionFromSwarm()
-                )),
-                new Portfolio(PORTFOLIO2, "Portfolio tech", CLIENT2, Map.of(
-                        SEC2, mismatchingQuantityFromSwarm(),
-                        SEC3, missingQuantityFromSwarm()
-                ))
+                new Portfolio(PORTFOLIO1, null, CLIENT1, null),
+                new Portfolio(PORTFOLIO2, "Portfolio tech", CLIENT2, null)
         );
     }
 
-    public Map<String, List<Position>> getAllPortfoliosMapFromBancaPostale() {
-        return Map.of(
-                PORTFOLIO1, List.of(simpleFromBancaPostale(), twoBanksFromBancaPostale()),
-                PORTFOLIO2, List.of(mismatchingQuantityFromBancaPostale())
-        );
+    public List<Position> getAllPositionsFromSwarm() {
+        return List.of(
+                simpleFromSwarm(),
+                twoBanksFromSwarm(),
+                missingBankPositionFromSwarm(),
+                mismatchingQuantityFromSwarm(),
+                missingQuantityFromSwarm());
     }
 
-    public Map<String, List<Position>> getAllPortfoliosMapFromNeobanca() {
-        return Map.of(
-                PORTFOLIO1, List.of(twoBanksFromNeobanca())
-        );
+    public List<Position> getAllPositionsFromBancaPostale() {
+        return List.of(simpleFromBancaPostale(), twoBanksFromBancaPostale(), mismatchingQuantityFromBancaPostale());
     }
 
-    public Map<String, List<Position>> getAllPortfoliosMapFromSuperBanca() {
-        return Map.of(
-                PORTFOLIO2, List.of(unknownPositionFromSuperBanca(), missingQuantityFromSuperBanca())
-        );
+    public List<Position> getAllPositionsFromNeobanca() {
+        return List.of(twoBanksFromNeobanca());
+    }
+
+    public List<Position> getAllPositionsFromSuperBanca() {
+        return List.of(unknownPositionFromSuperBanca(), missingQuantityFromSuperBanca());
     }
 
 
     //USE CASES :
 
     //Case simple
-    ConsolidatedPosition simpleFromSwarm() {
-        return new ConsolidatedPosition(SEC1, new Position(SEC1, 100D, PositionOrigin.INTERNAL, null), null);
+    Position simpleFromSwarm() {
+        return new Position(SEC1, 100D, PositionOrigin.INTERNAL, null, PORTFOLIO1, CLIENT1);
     }
 
     Position simpleFromBancaPostale() {
-        return new Position(SEC1, 100D, PositionOrigin.BANK, Bank.BANCAPOSTALE);
+        return new Position(SEC1, 100D, PositionOrigin.BANK, Bank.BANCAPOSTALE, PORTFOLIO1, CLIENT1);
     }
 
     //Case two banks
-    ConsolidatedPosition twoBanksFromSwarm() {
-        return new ConsolidatedPosition(SEC2, new Position(SEC2, 100D, PositionOrigin.INTERNAL, null), null);
+    Position twoBanksFromSwarm() {
+        return new Position(SEC2, 100D, PositionOrigin.INTERNAL, null, PORTFOLIO1, CLIENT1);
     }
 
     Position twoBanksFromBancaPostale() {
-        return new Position(SEC2, 80D, PositionOrigin.BANK, Bank.BANCAPOSTALE);
+        return new Position(SEC2, 80D, PositionOrigin.BANK, Bank.BANCAPOSTALE, PORTFOLIO1, CLIENT1);
     }
 
     Position twoBanksFromNeobanca() {
-        return new Position(SEC2, 20D, PositionOrigin.BANK, Bank.NEOBANCA);
+        return new Position(SEC2, 20D, PositionOrigin.BANK, Bank.NEOBANCA, PORTFOLIO1, CLIENT1);
     }
 
     //Case missing bank position
-    ConsolidatedPosition missingBankPositionFromSwarm() {
-        return new ConsolidatedPosition(SEC3, new Position(SEC3, 100D, PositionOrigin.INTERNAL, null), null);
+    Position missingBankPositionFromSwarm() {
+        return new Position(SEC3, 100D, PositionOrigin.INTERNAL, null, PORTFOLIO1, CLIENT1);
     }
 
     //Case unknown position
     Position unknownPositionFromSuperBanca() {
-        return new Position(SEC1, 100D, PositionOrigin.BANK, Bank.SUPERBANCA);
+        return new Position(SEC1, 100D, PositionOrigin.BANK, Bank.SUPERBANCA, PORTFOLIO2, CLIENT2);
     }
 
     //Case mismatching quantity
-    ConsolidatedPosition mismatchingQuantityFromSwarm() {
-        return new ConsolidatedPosition(SEC2, new Position(SEC2, 100D, PositionOrigin.INTERNAL, null), null);
+    Position mismatchingQuantityFromSwarm() {
+        return new Position(SEC2, 100D, PositionOrigin.INTERNAL, null, PORTFOLIO2, CLIENT2);
     }
 
     Position mismatchingQuantityFromBancaPostale() {
-        return new Position(SEC2, 80D, PositionOrigin.BANK, Bank.BANCAPOSTALE);
+        return new Position(SEC2, 80D, PositionOrigin.BANK, Bank.BANCAPOSTALE, PORTFOLIO2, CLIENT2);
     }
 
     //Case missing quantity
-    ConsolidatedPosition missingQuantityFromSwarm() {
-        return new ConsolidatedPosition(SEC3, new Position(SEC3, 100D, PositionOrigin.INTERNAL, null), null);
+    Position missingQuantityFromSwarm() {
+        return new Position(SEC3, 100D, PositionOrigin.INTERNAL, null, PORTFOLIO2, CLIENT2);
     }
 
     Position missingQuantityFromSuperBanca() {
-        return new Position(SEC3, null, PositionOrigin.BANK, Bank.SUPERBANCA);
+        return new Position(SEC3, null, PositionOrigin.BANK, Bank.SUPERBANCA, PORTFOLIO2, CLIENT2);
     }
 
 

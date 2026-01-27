@@ -9,5 +9,7 @@ import jakarta.annotation.Nullable;
 public record Position(Security security,
                        Double quantity,
                        PositionOrigin origin,
-                       @Nullable Bank bank /*Only used if origin = BANK*/) {
+                       @Nullable Bank bank, /*Only used if origin = BANK*/
+                       @Nullable String portfolioId,
+                       @Nullable String clientId) {
 }

@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {ConsolidatedPositionMapper.class})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PortfolioMapper {
 
     PortfolioEntity toEntity(Portfolio portfolio);
@@ -16,5 +16,5 @@ public interface PortfolioMapper {
 
     Portfolio toDomain(PortfolioResponse portfolioResponse);
 
-    PortfolioResponse toResponse(PortfolioEntity portfolioEntity);
+    PortfolioResponse toResponse(Portfolio portfolio);
 }

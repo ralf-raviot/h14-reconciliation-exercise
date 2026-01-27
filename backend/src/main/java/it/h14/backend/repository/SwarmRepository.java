@@ -1,21 +1,29 @@
 package it.h14.backend.repository;
 
-import it.h14.backend.mapper.PortfolioMapper;
+import it.h14.backend.domain.Portfolio;
+import it.h14.backend.domain.Position;
+import it.h14.backend.domain.Security;
 import it.h14.backend.mock.MockedData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class SwarmRepository {
 
     private final MockedData mockedData;
-    private final PortfolioRepository portfolioRepository;
-    private final PortfolioMapper portfolioMapper;
 
-    public void importData() {
-        mockedData.getAllPortfolios().forEach(portfolio -> {
-            portfolioRepository.save(portfolioMapper.toEntity(portfolio));
-        });
+    public List<Portfolio> getPortfolios() {
+        return mockedData.getAllPortfolios();
+    }
+
+    public List<Security> getSecurities() {
+        return mockedData.getAllSecurities();
+    }
+
+    public List<Position> getPositions() {
+        return mockedData.getAllPositionsFromSwarm();
     }
 }
