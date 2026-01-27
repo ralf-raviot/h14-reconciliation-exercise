@@ -1,14 +1,10 @@
 package it.h14.backend.domain;
 
-import it.h14.backend.entity.ConsolidatedPositionEntity;
 import jakarta.annotation.Nullable;
 
 import java.util.List;
 import java.util.Objects;
 
-/**
- * DTO for {@link ConsolidatedPositionEntity}
- */
 public record ConsolidatedPosition(Security security,
                                    @Nullable Position internalPosition,
                                    List<Position> bankPositions) {

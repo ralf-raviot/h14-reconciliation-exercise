@@ -2,7 +2,6 @@ package it.h14.backend.mapper;
 
 import it.h14.backend.domain.Portfolio;
 import it.h14.backend.entity.PortfolioEntity;
-import it.h14.backend.openapi.model.PortfolioResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
@@ -14,5 +13,5 @@ public interface PortfolioMapper {
 
     Portfolio toDomain(PortfolioEntity portfolioEntity);
 
-    PortfolioResponse toResponse(Portfolio portfolio);
+    //PortfolioResponse toResponse(Portfolio portfolio);
 }
