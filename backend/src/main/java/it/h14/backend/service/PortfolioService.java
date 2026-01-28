@@ -66,6 +66,8 @@ public class PortfolioService {
                             ).toList()));
         }
 
+        //TODO handle missing internal positions
+
         return consolidatedPositions;
     }
 
