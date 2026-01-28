@@ -1,34 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useEffect, useState} from 'react'
 import './App.css'
+import {portfoliosApi} from './api/client'
+import {PortfolioResponse, PortfolioSummaryResponse} from './api/generated'
+import PortfolioList from './components/PortfolioList'
+import PortfolioDetail from './components/PortfolioDetail'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [portfolios, setPortfolios] = useState<PortfolioSummaryResponse[]>([]);
+    const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        portfoliosApi.portfoliosGet()
+            .then(data => {
+                setPortfolios(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setError('Unable to load portfolios');
+                setLoading(false);
+            });
+    }, []);
+
+    const selectPortfolio = (id: string) => {
+        setLoading(true);
+        portfoliosApi.portfoliosPortfolioIdGet({portfolioId: id})
+            .then(data => {
+                setSelectedPortfolio(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setError('Unable to load portfolio details');
+                setLoading(false);
+            });
+    };
+
+    if (loading && portfolios.length === 0) return <div className="loading">Loading...</div>;
+    if (error) return (
+        <div className="error-container">
+            <p>Error: {error}</p>
+            <button className="btn-details" style={{width: 'auto'}} onClick={() => window.location.reload()}>Retry
+            </button>
+        </div>
+    );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="app-container">
+          <header>
+              <h1>H14 Reconciliation Dashboard</h1>
+          </header>
+
+          <main>
+              {!selectedPortfolio ? (
+                  <PortfolioList
+                      portfolios={portfolios}
+                      onSelectPortfolio={selectPortfolio}
+                  />
+              ) : (
+                  <PortfolioDetail
+                      portfolio={selectedPortfolio}
+                      onBack={() => setSelectedPortfolio(null)}
+                  />
+              )}
+          </main>
+
+          {loading && selectedPortfolio && (
+              <div className="loading-overlay">
+                  <div className="loading-spinner">Loading...</div>
+              </div>
+          )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 
