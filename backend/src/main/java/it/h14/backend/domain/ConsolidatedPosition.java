@@ -22,8 +22,13 @@ public record ConsolidatedPosition(Security security,
         return ConsolidationStatus.CONSOLIDATED;
     }
 
-    private Double getTotalBankQuantity() {
-        return bankPositions.stream().mapToDouble(Position::quantity).sum();
+    private double getTotalBankQuantity() {
+        return bankPositions.stream()
+                .filter(Objects::nonNull)
+                .map(Position::quantity)
+                .filter(Objects::nonNull)
+                .mapToDouble(Double::doubleValue)
+                .sum();
     }
 
     public enum ConsolidationStatus {

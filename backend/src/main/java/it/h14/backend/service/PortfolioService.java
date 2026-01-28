@@ -51,7 +51,7 @@ public class PortfolioService {
                 .stream().map(position -> positionMapper.toDomain(position, getSecurity(position.getIsin()))).collect(Collectors.toSet());
         var bankPositions = positionRepository.findByPortfolioIdAndOrigin(portfolioId, PositionOrigin.BANK)
                 .stream().map(position -> positionMapper.toDomain(position, getSecurity(position.getIsin()))).collect(Collectors.toSet());
-        bankPositions.addAll(positionRepository.findByClientIdAndOrigin(portfolioId, PositionOrigin.BANK)
+        bankPositions.addAll(positionRepository.findByClientIdAndOrigin(clientId, PositionOrigin.BANK)
                 .stream().map(position -> positionMapper.toDomain(position, getSecurity(position.getIsin()))).collect(Collectors.toSet()));
 
         for (var internalPosition : internalPositions) {
