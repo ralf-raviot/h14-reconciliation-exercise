@@ -52,6 +52,11 @@ Our discussion will be based on the code, not on this file.
   designed for mobile.
 - AI helps in the implementation of the frontend, but the architecture is from me.
 
+### Commits:
+
+- Most commit messages are AI-generated. It's a habit that I have taken because I usually squash the pull requests.
+  (From my point of view, it's a team regarding conventions, not an absolute rule)
+
 # Change in production
 
 - Manage pagination and filters (by clientId, for example)
