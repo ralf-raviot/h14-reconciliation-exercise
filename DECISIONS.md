@@ -50,6 +50,9 @@ Our discussion will be based on the code, not on this file.
 
 - The frontend is not particularly responsive. By time but also because generally this kind of application is not
   designed for mobile.
+- All the logic is actually in App.tsx (and not in the components). This is because actually the logic is basic.
+- In the future, the logic should be moved in the components, particularly if more features are added (like filters or
+  pagination)
 - AI helps in the implementation of the frontend, but the architecture is from me.
 
 ### Commits:
@@ -68,3 +71,5 @@ Our discussion will be based on the code, not on this file.
 - Add meaningful information, like the total value of the portfolio.
 - Implement a real repository for importing the data. This includes respecting the API contract of each bank.
 - Mock the bank and swarm repositories in the tests.
+- Add localization. (Even if the application is only in English, that is beneficial in case of change of internal
+  vocabulary or if the app will need translation in the future)
