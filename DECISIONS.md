@@ -20,15 +20,14 @@ Our discussion will be based on the code, not on this file.
 - The weakness of this model is the "duplication" between position and ConsolidatedPosition. There is maybe a better way
   to do it.
 - The isin is considered as always coherent. The best way to handle it is, of course, to have a unique source of truth.
-- The position object should be linked to a client/portfolio ID, but I realize this too late. This has lead to some
-  complexity
-  in the code.
+
 
 ### Test:
 
 - Bank and Swarm are not tested because they are mocked.
 - In the same logic, the tests used directly the mocked data of the "production" repository instead of mocking it to
   avoid duplication of the mocking.
+- There is a lack of automatique tests, mainly by lack of time.
 
 ### CronJob:
 
@@ -39,8 +38,8 @@ Our discussion will be based on the code, not on this file.
 ### Importing data:
 
 - For simplicity, the data import is mocked in the different bank and swarm repositories.
-- "Technically" Swarm and Bank "repositories" are not really repositories.
-- All bank repositories have the same code (=> Duplication). In real conditions, all banks have their own API, and so,
+- All bank repositories have the same code (more or less) (=> Duplication). In real conditions, all banks have their own
+  API, and so,
   the code will differ.
 
 ### Error handling:
@@ -49,7 +48,9 @@ Our discussion will be based on the code, not on this file.
 
 ### Frontend:
 
-- For timing reasons, the frontend is REALLY minimalistic.
+- The frontend is not particularly responsive. By time but also because generally this kind of application is not
+  designed for mobile.
+- AI helps in the implementation of the frontend, but the architecture is from me.
 
 # Change in production
 
@@ -57,7 +58,7 @@ Our discussion will be based on the code, not on this file.
 - Add a health check endpoint.
 - Use Spring Security.
 - Use a real database.
-- Cronjob can be replaced with a scheduler if kubernetes is used.
+- Cronjob can be replaced with a scheduler and a specific if kubernetes is used. (More flexible: No restart needed)
 - Add meaningful error messages.
 - Add meaningful information, like the total value of the portfolio.
 - Implement a real repository for importing the data. This includes respecting the API contract of each bank.
